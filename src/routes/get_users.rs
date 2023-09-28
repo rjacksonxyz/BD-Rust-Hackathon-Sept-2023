@@ -16,7 +16,7 @@ struct ErrorResponse {
 }
 
 pub async fn get_users(db_pool: web::Data<PgPool>) -> Result<HttpResponse> {
-    let result = sqlx::query("SELECT id, email, name FROM users")
+    let result = sqlx::query("SELECT email, name, user_id FROM users")
         .fetch_all(db_pool.get_ref())
         .await;
 
@@ -25,9 +25,9 @@ pub async fn get_users(db_pool: web::Data<PgPool>) -> Result<HttpResponse> {
             let users: Vec<User> = rows
                 .into_iter()
                 .map(|row| User {
-                    email: row.get(1),
-                    name: row.get(2),
-                    user_id: row.get(3),
+                    email: row.get("email"),
+                    name: row.get("name"),
+                    user_id: row.get("user_id"),
                 })
                 .collect();
 
