@@ -120,8 +120,9 @@ VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
             Ok(())
         }
         Err(e) => {
-            log::error!("Transaction was NOT added with error: {}", e);
-            Err(anyhow!("Transaction was NOT added with error: {}", e))
+            let s = format!("Transaction was NOT added with error: {}", e);
+            log::error!("{}", s);
+            Err(anyhow!("{}", s))
         }
     }
 }
