@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 use sqlx::{types::chrono, PgPool};
 use uuid::Uuid;
 
-#[derive(Debug, Serialize, Deserialize, sqlx::FromRow)]
+#[derive(Serialize, Deserialize, Debug, sqlx::FromRow)]
 pub struct User {
     name: String,
     email: String,
