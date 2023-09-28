@@ -1,12 +1,11 @@
 use crate::custom_error::Result;
 use actix_web::{
-    web::Path,
     web::{Data, Json},
     HttpResponse,
 };
 use chrono::Utc;
 use serde::{Deserialize, Serialize};
-use sqlx::{postgres::PgQueryResult, types::chrono, PgPool};
+use sqlx::{types::chrono, PgPool};
 use uuid::Uuid;
 
 #[derive(Debug, Serialize, Deserialize, sqlx::FromRow)]
@@ -48,7 +47,10 @@ pub async fn post_user(user: Json<User>, db_pool: Data<PgPool>) -> Result<HttpRe
         }
         Err(e) => {
             log::error!("User was NOT added with error: {}", e);
-            Ok(HttpResponse::BadRequest().body("user was not added"))
+            Ok(HttpResponse::BadRequest().body(format!(
+                "user: {} was not added with error: {}",
+                user.user_id, e
+            )))
         }
     }
 }

@@ -1,4 +1,4 @@
-use crate::routes::{get_users, health_check, post_user};
+use crate::routes::{get_users, health_check, post_user, price};
 use actix_web::middleware::Logger;
 use actix_web::{
     dev::Server,
@@ -17,6 +17,7 @@ pub fn run(listener: TcpListener, db_connection_pool: PgPool) -> Result<Server> 
             .route("/health_check", web::get().to(health_check))
             .route("/users", web::get().to(get_users))
             .route("/users", web::post().to(post_user))
+            .route("/price/{ticker}", web::get().to(price))
             .app_data(db_connection.clone())
     })
     .listen(listener)?
