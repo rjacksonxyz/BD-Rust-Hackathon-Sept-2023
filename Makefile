@@ -1,10 +1,10 @@
 .PHONY: start-db
 start-db:
-	@docker compose -f deployment/db/db.yml up --detach
+	podman-compose -f deployment/db/db.yml up --detach
 
 .PHONY: stop-db
 stop-db:
-	@docker compose -f deployment/db/db.yml down
+	podman-compose -f deployment/db/db.yml down
 
 .PHONY: run-migrations
 run-migrations:
