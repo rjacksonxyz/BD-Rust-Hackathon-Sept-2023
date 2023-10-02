@@ -14,9 +14,20 @@ name = "tard_fi_data"
 [dependencies]
 actix-web = "4"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
-serde = { version = "1", features = ["derive"]}
+serde = { version = "1", features = ["derive"] }
 env_logger = "0.9"
 log = "0.4"
+anyhow = "1.0.75"
+thiserror = "1.0.49"
+yahoo_finance_api = "2.1.0"
+
+[dependencies.uuid]
+version = "1.4.1"
+features = [
+    "v4",                # Lets you generate random UUIDs
+    "fast-rng",          # Use a faster (but still sufficiently random) RNG
+    "macro-diagnostics", # Enable better diagnostics for compile-time UUIDs
+]
 
 
 [dependencies.sqlx]
@@ -28,5 +39,5 @@ features = [
     "postgres",
     "uuid",
     "chrono",
-    "migrate"
+    "migrate",
 ]
